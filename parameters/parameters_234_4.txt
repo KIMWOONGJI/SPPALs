@@ -1,0 +1,5 @@
+Element,Length,Radius,Material
+1,m,m,1
+2,2e-3,7e-3,C-21
+3,13.9e-3,7e-3,Aluminum
+4,15.29e-3,0.75e-3,Aluminum
