@@ -30,9 +30,9 @@ opts.DataLines = dataLines;
 opts.Delimiter = ",";
 
 % Specify column names and types
-opts.VariableNames = ["e_", "l", "r","Mat"];
+opts.VariableNames = ["e_", "l", "r","Mat","N_piezo"];
 % opts.SelectedVariableNames = ["Length", "Radius","Material"];
-opts.VariableTypes = ["double", "double", "double", "string"];
+opts.VariableTypes = ["double", "double", "double", "string","double"];
 opts.VariableUnitsLine = 2;
 % opts.RowNamesColumn = 1;
 
@@ -44,6 +44,6 @@ opts.EmptyLineRule = "read";
 parameters = readtable(filename, opts);
 A    = pi*parameters.r.^2;
 parameters = addvars(parameters, A,'After','r');
-parameters.Properties.VariableUnits(4) = "m";
+parameters.Properties.VariableUnits(4) = "m^2";
 
 end

@@ -1,4 +1,4 @@
-function createfigure_fr_comp(X1, YMatrix1, X2, YMatrix2, LegendTitle, Legend ,Xlabel, Ylabel, Xscale, Yscale)
+function createfigure_fr_comp_OBS(X1, YMatrix1, X2, YMatrix2, X3, Y3, LegendTitle, Legend ,Xlabel, Ylabel, Xscale, Yscale)
 %CREATEFIGURE(X1, YMatrix1)
 %  X1:  vector of plot x data
 %  YMATRIX1:  matrix of plot y data
@@ -15,7 +15,7 @@ newcolors = [1 0 0
              0 1 1
              1 0 1];
 
-newcolors(size(YMatrix1,2)+1:end,:) = [];
+% newcolors(size(YMatrix1,2)+1:end,:) = [];
          
 colororder(newcolors)
 
@@ -26,13 +26,15 @@ hold(axes1,'on');
 % Create multiple line objects using matrix input to semilogy
 semilogy1 = semilogy(X1,YMatrix1,'LineWidth',1.5);
 for i=1:size(YMatrix1,2)
-    set(semilogy1(i),'DisplayName',Legend(i));
+    set(semilogy1(i),'DisplayName',Legend(i),'Color',newcolors(i,:));
 end
 
 semilogy2 = semilogy(X2,YMatrix2,'LineWidth',1.5);
 for i=1:size(YMatrix1,2)
-    set(semilogy2(i),'DisplayName',Legend(i),'LineStyle',":");
+    set(semilogy2(i),'DisplayName',Legend(i),'LineStyle',':','Color',newcolors(i,:));
 end
+
+semilogy(X3,Y3,'LineWidth',1.5,'DisplayName',Legend(end),'LineStyle','-.','Color',newcolors(i+1,:));
 
 % Create ylabel
 ylabel(Ylabel);
