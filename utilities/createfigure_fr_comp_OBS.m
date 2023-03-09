@@ -1,4 +1,4 @@
-function createfigure_fr_comp_OBS(X1, YMatrix1, X2, YMatrix2, X3, Y3, LegendTitle, Legend ,Xlabel, Ylabel, Xscale, Yscale)
+function createfigure_fr_comp_OBS(X1, YMatrix1, X2, YMatrix2, X3, Y3, LegendTitle, Legend ,Xlabel, Ylabel, Xscale, Yscale, project, time, model_no)
 %CREATEFIGURE(X1, YMatrix1)
 %  X1:  vector of plot x data
 %  YMATRIX1:  matrix of plot y data
@@ -34,7 +34,7 @@ for i=1:size(YMatrix1,2)
     set(semilogy2(i),'DisplayName',Legend(i),'LineStyle',':','Color',newcolors(i,:));
 end
 
-semilogy(X3,Y3,'LineWidth',1.5,'DisplayName',Legend(end),'LineStyle','-.','Color',newcolors(i+1,:));
+semilogy(X3,Y3,'LineWidth',1.5,'DisplayName',Legend(end),'LineStyle','--','Color',newcolors(i+1,:));
 
 % Create ylabel
 ylabel(Ylabel);
@@ -51,6 +51,7 @@ axes1.XAxis.Exponent = 3;
 
 % Create legend
 legend1 = legend(axes1,'show');
-set(legend1,'Orientation','horizontal','Location','northoutside');
+set(legend1,'Orientation','horizontal','Location','southwest','NumColumns',size(YMatrix1,2));
 title(legend1,LegendTitle);
 
+saveas(figure1, project.RootFolder+"\results\"+time+"fr_comp_OBS_"+num2str(model_no)+".svg")
