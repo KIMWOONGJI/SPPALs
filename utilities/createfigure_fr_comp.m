@@ -1,4 +1,4 @@
-function createfigure_fr_comp(X1, YMatrix1, X2, YMatrix2, LegendTitle, Legend ,Xlabel, Ylabel, Xscale, Yscale)
+function createfigure_fr_comp(X1, YMatrix1, X2, YMatrix2, LegendTitle, Legend ,Xlabel, Ylabel, Xscale, Yscale, project, time, model_no)
 %CREATEFIGURE(X1, YMatrix1)
 %  X1:  vector of plot x data
 %  YMATRIX1:  matrix of plot y data
@@ -8,14 +8,16 @@ function createfigure_fr_comp(X1, YMatrix1, X2, YMatrix2, LegendTitle, Legend ,X
 % Create figure
 figure1 = figure('Units', 'centimeters', 'Position',[3 3 3+20 3+11.25], 'Name','Frequency response','Color',[1 1 1]);
 
-newcolors = [1 0 0
-             0 1 0
-             0 0 1
-             1 1 0
-             0 1 1
-             1 0 1];
+% newcolors = [1 0 0
+%              0 1 0
+%              0 0 1
+%              1 1 0
+%              0 1 1
+%              1 0 1];
 
-newcolors(size(YMatrix1,2)+1:end,:) = [];
+newcolors = hsv(max(size(YMatrix1,2),size(YMatrix2,2)));
+
+% newcolors(size(YMatrix1,2)+1:end,:) = [];
          
 colororder(newcolors)
 
@@ -26,12 +28,12 @@ hold(axes1,'on');
 % Create multiple line objects using matrix input to semilogy
 semilogy1 = semilogy(X1,YMatrix1,'LineWidth',1.5);
 for i=1:size(YMatrix1,2)
-    set(semilogy1(i),'DisplayName',Legend(i));
+    set(semilogy1(i),'DisplayName',Legend(i),'Color',newcolors(i,:));
 end
 
 semilogy2 = semilogy(X2,YMatrix2,'LineWidth',1.5);
-for i=1:size(YMatrix1,2)
-    set(semilogy2(i),'DisplayName',Legend(i),'LineStyle',":");
+for i=1:size(YMatrix2,2)
+    set(semilogy2(i),'DisplayName',Legend(i),'LineStyle',":",'Color',newcolors(i,:));
 end
 
 % Create ylabel
@@ -49,6 +51,7 @@ axes1.XAxis.Exponent = 3;
 
 % Create legend
 legend1 = legend(axes1,'show');
-set(legend1,'Orientation','horizontal','Location','northoutside');
+set(legend1,'Orientation','horizontal','Location','southwest','NumColumns',size(YMatrix1,2));
 title(legend1,LegendTitle);
 
+saveas(figure1, project.RootFolder+"\results\"+time+"fr_comp_"+num2str(model_no)+".svg")
