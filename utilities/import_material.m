@@ -30,9 +30,9 @@ opts.DataLines = dataLines;
 opts.Delimiter = ",";
 
 % Specify column names and types
-opts.VariableNames = ["Mat", "rho", "Y33", "nu","eps33","d33","d31","DF"];
+opts.VariableNames = ["Mat", "rho", "Y33", "nu", "Q", "eps33","d33","g33","k33","d31","DF"];
 % opts.SelectedVariableNames = ["Density", "YoungsModulus", "PoissonRatio","eps33","d33","d31","DissipationFactor"];
-opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double"];
+opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
 opts.VariableUnitsLine = 2;
 opts.RowNamesColumn = 1;
 

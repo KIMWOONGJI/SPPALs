@@ -1,0 +1,6 @@
+Element,Length,Radius,Material,No. of piezoelectric material
+1,m,m,1,1
+1,0.010882168930711,7e-3,Stainless Steel,1
+2,4e-3,7e-3,C-21,4
+3,1e-3,7e-3,Aluminum,1
+4,0.016919290709211,0.75e-3,Aluminum,1
