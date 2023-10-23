@@ -30,9 +30,9 @@ opts.DataLines = dataLines;
 opts.Delimiter = ",";
 
 % Specify column names and types
-opts.VariableNames = ["Mat", "rho", "Y33", "nu", "Q", "eps33","d33","g33","k33","d31","DF"];
+opts.VariableNames = ["Mat", "rho", "Y33", "Y11", "nu", "Q", "eps33","d33","g33","k33","d31","DF"];
 % opts.SelectedVariableNames = ["Density", "YoungsModulus", "PoissonRatio","eps33","d33","d31","DissipationFactor"];
-opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
+opts.VariableTypes = ["string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double"];
 opts.VariableUnitsLine = 2;
 opts.RowNamesColumn = 1;
 
@@ -46,8 +46,12 @@ opts = setvaropts(opts, "Mat", "EmptyFieldRule", "auto");
 
 % Import the data
 materials = readtable(filename, opts);
+materials.Y33 = materials.Y33.*(1+1i./materials.Q);
 v3 = sqrt(materials.Y33./materials.rho);
 materials = addvars(materials,v3);
-materials.Properties.VariableUnits(9) = "m/s";
+materials.Y11 = materials.Y11.*(1+1i./materials.Q);
+v1 = sqrt(materials.Y11./materials.rho);
+materials = addvars(materials,v1);
+% materials.Properties.VariableUnits(9) = "m/s";
 
 end
